@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.boot.datasource.dao.test.TestOpUserLoginMapper" >
+  <resultMap id="BaseResultMap" type="com.example.boot.datasource.model.OpUserLogin" >
+    <id column="C_PK_ID" property="cPkId" jdbcType="VARCHAR" />
+    <result column="C_CHANNEL_CODE" property="cChannelCode" jdbcType="VARCHAR" />
+    <result column="C_MOBILE" property="cMobile" jdbcType="VARCHAR" />
+    <result column="C_PWD" property="cPwd" jdbcType="VARCHAR" />
+    <result column="C_SALT" property="cSalt" jdbcType="VARCHAR" />
+    <result column="C_NAME" property="cName" jdbcType="VARCHAR" />
+    <result column="C_PROVINCE" property="cProvince" jdbcType="VARCHAR" />
+    <result column="C_CITY" property="cCity" jdbcType="VARCHAR" />
+    <result column="C_COM_CODE" property="cComCode" jdbcType="VARCHAR" />
+    <result column="C_COM_NAME" property="cComName" jdbcType="VARCHAR" />
+    <result column="C_EMAL" property="cEmal" jdbcType="VARCHAR" />
+    <result column="C_PRO_TYPE" property="cProType" jdbcType="VARCHAR" />
+    <result column="C_MAIN_TYPE" property="cMainType" jdbcType="CHAR" />
+    <result column="C_MAIN_NAME" property="cMainName" jdbcType="VARCHAR" />
+    <result column="C_LEADER_NAME" property="cLeaderName" jdbcType="VARCHAR" />
+    <result column="C_CRED_NO" property="cCredNo" jdbcType="VARCHAR" />
+    <result column="C_CRED_FRONT" property="cCredFront" jdbcType="VARCHAR" />
+    <result column="C_CRED_REVERSE" property="cCredReverse" jdbcType="VARCHAR" />
+    <result column="C_DETAIL_ADDR" property="cDetailAddr" jdbcType="VARCHAR" />
+    <result column="C_PERSON_STATE" property="cPersonState" jdbcType="CHAR" />
+    <result column="C_CHECK_REASON" property="cCheckReason" jdbcType="VARCHAR" />
+    <result column="T_CREATE_TIME" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="T_UPDATE_TIME" property="tUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="C_RESV_TXT_1" property="cResvTxt1" jdbcType="VARCHAR" />
+    <result column="C_RESV_TXT_2" property="cResvTxt2" jdbcType="VARCHAR" />
+    <result column="C_RESV_TXT_3" property="cResvTxt3" jdbcType="VARCHAR" />
+    <result column="N_RESV_NUM_1" property="nResvNum1" jdbcType="DECIMAL" />
+    <result column="N_RESV_NUM_2" property="nResvNum2" jdbcType="DECIMAL" />
+    <result column="C_LOCA_FRONT_PATH" property="cLocaFrontPath" jdbcType="VARCHAR" />
+    <result column="C_LOCA_REV_PATH" property="cLocaRevPath" jdbcType="VARCHAR" />
+    <result column="C_PARENT_CODE" property="cParentCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    C_PK_ID, C_CHANNEL_CODE, C_MOBILE, C_PWD, C_SALT, C_NAME, C_PROVINCE, C_CITY, C_COM_CODE, 
+    C_COM_NAME, C_EMAL, C_PRO_TYPE, C_MAIN_TYPE, C_MAIN_NAME, C_LEADER_NAME, C_CRED_NO, 
+    C_CRED_FRONT, C_CRED_REVERSE, C_DETAIL_ADDR, C_PERSON_STATE, C_CHECK_REASON, T_CREATE_TIME, 
+    T_UPDATE_TIME, C_RESV_TXT_1, C_RESV_TXT_2, C_RESV_TXT_3, N_RESV_NUM_1, N_RESV_NUM_2, 
+    C_LOCA_FRONT_PATH, C_LOCA_REV_PATH, C_PARENT_CODE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.boot.datasource.model.OpUserLoginExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from op_user_login
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from op_user_login
+    where C_PK_ID = #{cPkId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from op_user_login
+    where C_PK_ID = #{cPkId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.boot.datasource.model.OpUserLoginExample" >
+    delete from op_user_login
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.boot.datasource.model.OpUserLogin" >
+    insert into op_user_login (C_PK_ID, C_CHANNEL_CODE, C_MOBILE, 
+      C_PWD, C_SALT, C_NAME, 
+      C_PROVINCE, C_CITY, C_COM_CODE, 
+      C_COM_NAME, C_EMAL, C_PRO_TYPE, 
+      C_MAIN_TYPE, C_MAIN_NAME, C_LEADER_NAME, 
+      C_CRED_NO, C_CRED_FRONT, C_CRED_REVERSE, 
+      C_DETAIL_ADDR, C_PERSON_STATE, C_CHECK_REASON, 
+      T_CREATE_TIME, T_UPDATE_TIME, C_RESV_TXT_1, 
+      C_RESV_TXT_2, C_RESV_TXT_3, N_RESV_NUM_1, 
+      N_RESV_NUM_2, C_LOCA_FRONT_PATH, C_LOCA_REV_PATH, 
+      C_PARENT_CODE)
+    values (#{cPkId,jdbcType=VARCHAR}, #{cChannelCode,jdbcType=VARCHAR}, #{cMobile,jdbcType=VARCHAR}, 
+      #{cPwd,jdbcType=VARCHAR}, #{cSalt,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, 
+      #{cProvince,jdbcType=VARCHAR}, #{cCity,jdbcType=VARCHAR}, #{cComCode,jdbcType=VARCHAR}, 
+      #{cComName,jdbcType=VARCHAR}, #{cEmal,jdbcType=VARCHAR}, #{cProType,jdbcType=VARCHAR}, 
+      #{cMainType,jdbcType=CHAR}, #{cMainName,jdbcType=VARCHAR}, #{cLeaderName,jdbcType=VARCHAR}, 
+      #{cCredNo,jdbcType=VARCHAR}, #{cCredFront,jdbcType=VARCHAR}, #{cCredReverse,jdbcType=VARCHAR}, 
+      #{cDetailAddr,jdbcType=VARCHAR}, #{cPersonState,jdbcType=CHAR}, #{cCheckReason,jdbcType=VARCHAR}, 
+      #{tCreateTime,jdbcType=TIMESTAMP}, #{tUpdateTime,jdbcType=TIMESTAMP}, #{cResvTxt1,jdbcType=VARCHAR}, 
+      #{cResvTxt2,jdbcType=VARCHAR}, #{cResvTxt3,jdbcType=VARCHAR}, #{nResvNum1,jdbcType=DECIMAL}, 
+      #{nResvNum2,jdbcType=DECIMAL}, #{cLocaFrontPath,jdbcType=VARCHAR}, #{cLocaRevPath,jdbcType=VARCHAR}, 
+      #{cParentCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.boot.datasource.model.OpUserLogin" >
+    insert into op_user_login
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cPkId != null" >
+        C_PK_ID,
+      </if>
+      <if test="cChannelCode != null" >
+        C_CHANNEL_CODE,
+      </if>
+      <if test="cMobile != null" >
+        C_MOBILE,
+      </if>
+      <if test="cPwd != null" >
+        C_PWD,
+      </if>
+      <if test="cSalt != null" >
+        C_SALT,
+      </if>
+      <if test="cName != null" >
+        C_NAME,
+      </if>
+      <if test="cProvince != null" >
+        C_PROVINCE,
+      </if>
+      <if test="cCity != null" >
+        C_CITY,
+      </if>
+      <if test="cComCode != null" >
+        C_COM_CODE,
+      </if>
+      <if test="cComName != null" >
+        C_COM_NAME,
+      </if>
+      <if test="cEmal != null" >
+        C_EMAL,
+      </if>
+      <if test="cProType != null" >
+        C_PRO_TYPE,
+      </if>
+      <if test="cMainType != null" >
+        C_MAIN_TYPE,
+      </if>
+      <if test="cMainName != null" >
+        C_MAIN_NAME,
+      </if>
+      <if test="cLeaderName != null" >
+        C_LEADER_NAME,
+      </if>
+      <if test="cCredNo != null" >
+        C_CRED_NO,
+      </if>
+      <if test="cCredFront != null" >
+        C_CRED_FRONT,
+      </if>
+      <if test="cCredReverse != null" >
+        C_CRED_REVERSE,
+      </if>
+      <if test="cDetailAddr != null" >
+        C_DETAIL_ADDR,
+      </if>
+      <if test="cPersonState != null" >
+        C_PERSON_STATE,
+      </if>
+      <if test="cCheckReason != null" >
+        C_CHECK_REASON,
+      </if>
+      <if test="tCreateTime != null" >
+        T_CREATE_TIME,
+      </if>
+      <if test="tUpdateTime != null" >
+        T_UPDATE_TIME,
+      </if>
+      <if test="cResvTxt1 != null" >
+        C_RESV_TXT_1,
+      </if>
+      <if test="cResvTxt2 != null" >
+        C_RESV_TXT_2,
+      </if>
+      <if test="cResvTxt3 != null" >
+        C_RESV_TXT_3,
+      </if>
+      <if test="nResvNum1 != null" >
+        N_RESV_NUM_1,
+      </if>
+      <if test="nResvNum2 != null" >
+        N_RESV_NUM_2,
+      </if>
+      <if test="cLocaFrontPath != null" >
+        C_LOCA_FRONT_PATH,
+      </if>
+      <if test="cLocaRevPath != null" >
+        C_LOCA_REV_PATH,
+      </if>
+      <if test="cParentCode != null" >
+        C_PARENT_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cPkId != null" >
+        #{cPkId,jdbcType=VARCHAR},
+      </if>
+      <if test="cChannelCode != null" >
+        #{cChannelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cMobile != null" >
+        #{cMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cPwd != null" >
+        #{cPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cSalt != null" >
+        #{cSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cProvince != null" >
+        #{cProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="cCity != null" >
+        #{cCity,jdbcType=VARCHAR},
+      </if>
+      <if test="cComCode != null" >
+        #{cComCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cComName != null" >
+        #{cComName,jdbcType=VARCHAR},
+      </if>
+      <if test="cEmal != null" >
+        #{cEmal,jdbcType=VARCHAR},
+      </if>
+      <if test="cProType != null" >
+        #{cProType,jdbcType=VARCHAR},
+      </if>
+      <if test="cMainType != null" >
+        #{cMainType,jdbcType=CHAR},
+      </if>
+      <if test="cMainName != null" >
+        #{cMainName,jdbcType=VARCHAR},
+      </if>
+      <if test="cLeaderName != null" >
+        #{cLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="cCredNo != null" >
+        #{cCredNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cCredFront != null" >
+        #{cCredFront,jdbcType=VARCHAR},
+      </if>
+      <if test="cCredReverse != null" >
+        #{cCredReverse,jdbcType=VARCHAR},
+      </if>
+      <if test="cDetailAddr != null" >
+        #{cDetailAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="cPersonState != null" >
+        #{cPersonState,jdbcType=CHAR},
+      </if>
+      <if test="cCheckReason != null" >
+        #{cCheckReason,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUpdateTime != null" >
+        #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cResvTxt1 != null" >
+        #{cResvTxt1,jdbcType=VARCHAR},
+      </if>
+      <if test="cResvTxt2 != null" >
+        #{cResvTxt2,jdbcType=VARCHAR},
+      </if>
+      <if test="cResvTxt3 != null" >
+        #{cResvTxt3,jdbcType=VARCHAR},
+      </if>
+      <if test="nResvNum1 != null" >
+        #{nResvNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="nResvNum2 != null" >
+        #{nResvNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="cLocaFrontPath != null" >
+        #{cLocaFrontPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cLocaRevPath != null" >
+        #{cLocaRevPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cParentCode != null" >
+        #{cParentCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.boot.datasource.model.OpUserLoginExample" resultType="java.lang.Integer" >
+    select count(*) from op_user_login
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update op_user_login
+    <set >
+      <if test="record.cPkId != null" >
+        C_PK_ID = #{record.cPkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cChannelCode != null" >
+        C_CHANNEL_CODE = #{record.cChannelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cMobile != null" >
+        C_MOBILE = #{record.cMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPwd != null" >
+        C_PWD = #{record.cPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cSalt != null" >
+        C_SALT = #{record.cSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cName != null" >
+        C_NAME = #{record.cName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cProvince != null" >
+        C_PROVINCE = #{record.cProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cCity != null" >
+        C_CITY = #{record.cCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cComCode != null" >
+        C_COM_CODE = #{record.cComCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cComName != null" >
+        C_COM_NAME = #{record.cComName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cEmal != null" >
+        C_EMAL = #{record.cEmal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cProType != null" >
+        C_PRO_TYPE = #{record.cProType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cMainType != null" >
+        C_MAIN_TYPE = #{record.cMainType,jdbcType=CHAR},
+      </if>
+      <if test="record.cMainName != null" >
+        C_MAIN_NAME = #{record.cMainName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLeaderName != null" >
+        C_LEADER_NAME = #{record.cLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cCredNo != null" >
+        C_CRED_NO = #{record.cCredNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cCredFront != null" >
+        C_CRED_FRONT = #{record.cCredFront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cCredReverse != null" >
+        C_CRED_REVERSE = #{record.cCredReverse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cDetailAddr != null" >
+        C_DETAIL_ADDR = #{record.cDetailAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPersonState != null" >
+        C_PERSON_STATE = #{record.cPersonState,jdbcType=CHAR},
+      </if>
+      <if test="record.cCheckReason != null" >
+        C_CHECK_REASON = #{record.cCheckReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tCreateTime != null" >
+        T_CREATE_TIME = #{record.tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tUpdateTime != null" >
+        T_UPDATE_TIME = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cResvTxt1 != null" >
+        C_RESV_TXT_1 = #{record.cResvTxt1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cResvTxt2 != null" >
+        C_RESV_TXT_2 = #{record.cResvTxt2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cResvTxt3 != null" >
+        C_RESV_TXT_3 = #{record.cResvTxt3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nResvNum1 != null" >
+        N_RESV_NUM_1 = #{record.nResvNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nResvNum2 != null" >
+        N_RESV_NUM_2 = #{record.nResvNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cLocaFrontPath != null" >
+        C_LOCA_FRONT_PATH = #{record.cLocaFrontPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLocaRevPath != null" >
+        C_LOCA_REV_PATH = #{record.cLocaRevPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cParentCode != null" >
+        C_PARENT_CODE = #{record.cParentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update op_user_login
+    set C_PK_ID = #{record.cPkId,jdbcType=VARCHAR},
+      C_CHANNEL_CODE = #{record.cChannelCode,jdbcType=VARCHAR},
+      C_MOBILE = #{record.cMobile,jdbcType=VARCHAR},
+      C_PWD = #{record.cPwd,jdbcType=VARCHAR},
+      C_SALT = #{record.cSalt,jdbcType=VARCHAR},
+      C_NAME = #{record.cName,jdbcType=VARCHAR},
+      C_PROVINCE = #{record.cProvince,jdbcType=VARCHAR},
+      C_CITY = #{record.cCity,jdbcType=VARCHAR},
+      C_COM_CODE = #{record.cComCode,jdbcType=VARCHAR},
+      C_COM_NAME = #{record.cComName,jdbcType=VARCHAR},
+      C_EMAL = #{record.cEmal,jdbcType=VARCHAR},
+      C_PRO_TYPE = #{record.cProType,jdbcType=VARCHAR},
+      C_MAIN_TYPE = #{record.cMainType,jdbcType=CHAR},
+      C_MAIN_NAME = #{record.cMainName,jdbcType=VARCHAR},
+      C_LEADER_NAME = #{record.cLeaderName,jdbcType=VARCHAR},
+      C_CRED_NO = #{record.cCredNo,jdbcType=VARCHAR},
+      C_CRED_FRONT = #{record.cCredFront,jdbcType=VARCHAR},
+      C_CRED_REVERSE = #{record.cCredReverse,jdbcType=VARCHAR},
+      C_DETAIL_ADDR = #{record.cDetailAddr,jdbcType=VARCHAR},
+      C_PERSON_STATE = #{record.cPersonState,jdbcType=CHAR},
+      C_CHECK_REASON = #{record.cCheckReason,jdbcType=VARCHAR},
+      T_CREATE_TIME = #{record.tCreateTime,jdbcType=TIMESTAMP},
+      T_UPDATE_TIME = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      C_RESV_TXT_1 = #{record.cResvTxt1,jdbcType=VARCHAR},
+      C_RESV_TXT_2 = #{record.cResvTxt2,jdbcType=VARCHAR},
+      C_RESV_TXT_3 = #{record.cResvTxt3,jdbcType=VARCHAR},
+      N_RESV_NUM_1 = #{record.nResvNum1,jdbcType=DECIMAL},
+      N_RESV_NUM_2 = #{record.nResvNum2,jdbcType=DECIMAL},
+      C_LOCA_FRONT_PATH = #{record.cLocaFrontPath,jdbcType=VARCHAR},
+      C_LOCA_REV_PATH = #{record.cLocaRevPath,jdbcType=VARCHAR},
+      C_PARENT_CODE = #{record.cParentCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.boot.datasource.model.OpUserLogin" >
+    update op_user_login
+    <set >
+      <if test="cChannelCode != null" >
+        C_CHANNEL_CODE = #{cChannelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cMobile != null" >
+        C_MOBILE = #{cMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cPwd != null" >
+        C_PWD = #{cPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cSalt != null" >
+        C_SALT = #{cSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null" >
+        C_NAME = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cProvince != null" >
+        C_PROVINCE = #{cProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="cCity != null" >
+        C_CITY = #{cCity,jdbcType=VARCHAR},
+      </if>
+      <if test="cComCode != null" >
+        C_COM_CODE = #{cComCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cComName != null" >
+        C_COM_NAME = #{cComName,jdbcType=VARCHAR},
+      </if>
+      <if test="cEmal != null" >
+        C_EMAL = #{cEmal,jdbcType=VARCHAR},
+      </if>
+      <if test="cProType != null" >
+        C_PRO_TYPE = #{cProType,jdbcType=VARCHAR},
+      </if>
+      <if test="cMainType != null" >
+        C_MAIN_TYPE = #{cMainType,jdbcType=CHAR},
+      </if>
+      <if test="cMainName != null" >
+        C_MAIN_NAME = #{cMainName,jdbcType=VARCHAR},
+      </if>
+      <if test="cLeaderName != null" >
+        C_LEADER_NAME = #{cLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="cCredNo != null" >
+        C_CRED_NO = #{cCredNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cCredFront != null" >
+        C_CRED_FRONT = #{cCredFront,jdbcType=VARCHAR},
+      </if>
+      <if test="cCredReverse != null" >
+        C_CRED_REVERSE = #{cCredReverse,jdbcType=VARCHAR},
+      </if>
+      <if test="cDetailAddr != null" >
+        C_DETAIL_ADDR = #{cDetailAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="cPersonState != null" >
+        C_PERSON_STATE = #{cPersonState,jdbcType=CHAR},
+      </if>
+      <if test="cCheckReason != null" >
+        C_CHECK_REASON = #{cCheckReason,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        T_CREATE_TIME = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUpdateTime != null" >
+        T_UPDATE_TIME = #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cResvTxt1 != null" >
+        C_RESV_TXT_1 = #{cResvTxt1,jdbcType=VARCHAR},
+      </if>
+      <if test="cResvTxt2 != null" >
+        C_RESV_TXT_2 = #{cResvTxt2,jdbcType=VARCHAR},
+      </if>
+      <if test="cResvTxt3 != null" >
+        C_RESV_TXT_3 = #{cResvTxt3,jdbcType=VARCHAR},
+      </if>
+      <if test="nResvNum1 != null" >
+        N_RESV_NUM_1 = #{nResvNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="nResvNum2 != null" >
+        N_RESV_NUM_2 = #{nResvNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="cLocaFrontPath != null" >
+        C_LOCA_FRONT_PATH = #{cLocaFrontPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cLocaRevPath != null" >
+        C_LOCA_REV_PATH = #{cLocaRevPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cParentCode != null" >
+        C_PARENT_CODE = #{cParentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where C_PK_ID = #{cPkId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.boot.datasource.model.OpUserLogin" >
+    update op_user_login
+    set C_CHANNEL_CODE = #{cChannelCode,jdbcType=VARCHAR},
+      C_MOBILE = #{cMobile,jdbcType=VARCHAR},
+      C_PWD = #{cPwd,jdbcType=VARCHAR},
+      C_SALT = #{cSalt,jdbcType=VARCHAR},
+      C_NAME = #{cName,jdbcType=VARCHAR},
+      C_PROVINCE = #{cProvince,jdbcType=VARCHAR},
+      C_CITY = #{cCity,jdbcType=VARCHAR},
+      C_COM_CODE = #{cComCode,jdbcType=VARCHAR},
+      C_COM_NAME = #{cComName,jdbcType=VARCHAR},
+      C_EMAL = #{cEmal,jdbcType=VARCHAR},
+      C_PRO_TYPE = #{cProType,jdbcType=VARCHAR},
+      C_MAIN_TYPE = #{cMainType,jdbcType=CHAR},
+      C_MAIN_NAME = #{cMainName,jdbcType=VARCHAR},
+      C_LEADER_NAME = #{cLeaderName,jdbcType=VARCHAR},
+      C_CRED_NO = #{cCredNo,jdbcType=VARCHAR},
+      C_CRED_FRONT = #{cCredFront,jdbcType=VARCHAR},
+      C_CRED_REVERSE = #{cCredReverse,jdbcType=VARCHAR},
+      C_DETAIL_ADDR = #{cDetailAddr,jdbcType=VARCHAR},
+      C_PERSON_STATE = #{cPersonState,jdbcType=CHAR},
+      C_CHECK_REASON = #{cCheckReason,jdbcType=VARCHAR},
+      T_CREATE_TIME = #{tCreateTime,jdbcType=TIMESTAMP},
+      T_UPDATE_TIME = #{tUpdateTime,jdbcType=TIMESTAMP},
+      C_RESV_TXT_1 = #{cResvTxt1,jdbcType=VARCHAR},
+      C_RESV_TXT_2 = #{cResvTxt2,jdbcType=VARCHAR},
+      C_RESV_TXT_3 = #{cResvTxt3,jdbcType=VARCHAR},
+      N_RESV_NUM_1 = #{nResvNum1,jdbcType=DECIMAL},
+      N_RESV_NUM_2 = #{nResvNum2,jdbcType=DECIMAL},
+      C_LOCA_FRONT_PATH = #{cLocaFrontPath,jdbcType=VARCHAR},
+      C_LOCA_REV_PATH = #{cLocaRevPath,jdbcType=VARCHAR},
+      C_PARENT_CODE = #{cParentCode,jdbcType=VARCHAR}
+    where C_PK_ID = #{cPkId,jdbcType=VARCHAR}
+  </update>
+</mapper>
