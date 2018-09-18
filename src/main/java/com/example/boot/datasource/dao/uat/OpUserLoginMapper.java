@@ -1,12 +1,14 @@
-package com.example.boot.datasource.dao.test;
+package com.example.boot.datasource.dao.uat;
 
 import com.example.boot.datasource.model.OpUserLogin;
 import com.example.boot.datasource.model.OpUserLoginExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
-public interface TestOpUserLoginMapper {
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
+
+@Component("uatOpUserLoginMapper")
+public interface OpUserLoginMapper {
     int countByExample(OpUserLoginExample example);
 
     int deleteByExample(OpUserLoginExample example);

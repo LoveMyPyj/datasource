@@ -1,7 +1,6 @@
 package com.example.boot.datasource;
 
-import com.example.boot.datasource.dao.test.TestOpUserLoginMapper;
-import com.example.boot.datasource.dao.uat.UatOpUserLoginMapper;
+import com.example.boot.datasource.dao.test.OpUserLoginMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class DataSourceApplicationTests {
     @Autowired
-    private TestOpUserLoginMapper testsOpUserLoginMapper;
+    private OpUserLoginMapper testOpUserLoginMapper;
     @Autowired
-    private UatOpUserLoginMapper uatOpUserLoginMapper;
+    private com.example.boot.datasource.dao.uat.OpUserLoginMapper uatOpUserLoginMapper;
 	@Test
 	public void contextLoads() {
-        System.out.println(testsOpUserLoginMapper.selectByPrimaryKey("173db91819594bcda5a1fba6005d37b9"));
-        System.out.println(uatOpUserLoginMapper.selectByPrimaryKey("2bc17072761f4603b6767ea1454cb92d"));
+        System.out.println(testOpUserLoginMapper.selectByPrimaryKey("198bcde1d9454a798416302902374961"));
+        System.out.println(uatOpUserLoginMapper.selectByPrimaryKey("3984ca82caa5404d93da871400302c2f"));
 	}
 
 }
